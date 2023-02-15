@@ -16,7 +16,7 @@
 <!------------------------------------------------------------------------------------------------>
     <!--Title -->
     <h1>
-        Shortest First Simulator
+        Shortest Job First Simulator
     </h1>
 <!------------------------------------------------------------------------------------------------>
     <!-- Inpute div (Outer box of the main body) used to position all the elements together in a group-->
@@ -48,7 +48,7 @@
         <input id="Submit" type="submit" value="Input Values" onclick="addrow()">
     </div>
     <div id="tablebuttons">
-        <button class="buttontype1">Reset Table</button>
+        <button class="buttontype1" onclick="resettable()">Reset Table </button>
         <button class="buttontype1" onclick="data_extractor()">Calculate</button>
     </div>
     <div id="Tablediv">
@@ -72,6 +72,8 @@
             </thead>
         </table> -->
     </div>
+    <div id="chart" style="display:flex; flex-direction: row; margin: 0; border: 2px solid black; height: 50px;"></div>
+
 </body>
 <script src="script.js"></script>
 </html>
