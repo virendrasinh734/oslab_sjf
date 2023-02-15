@@ -56,7 +56,7 @@ function data_extractor(){
     }
     console.log("This is the input array");
     console.log(inputarr);
-    calculate_compT(inputarr);
+    scheduler(inputarr);
 }
 
 //this function would do the scheduling and get the completion time stored in an array which would be returned
@@ -65,9 +65,11 @@ function scheduler(input){
     let readyQueue=[];
     let no_of_processes=4;
     let time=0;
+    let completed=[];
     while(no_of_processes>0){
         let in_r=0;
         let c=0;
+        
         for(let i=0;i<input.length;i++){
             if(time>=input[i][1] && !(readyQueue.includes(input[i]))){
                 readyQueue.push(input[i]);
@@ -85,7 +87,13 @@ function scheduler(input){
             for(let j=0;j<readyQueue.length;j++){
                 if(readyQueue[j][2]==min){
                     time+=readyQueue[j][2];
-                    readyQueue[j].push(time);
+                    let temp=readyQueue[j];
+                    temp.push(time);
+                    completed.push(temp);
+                    readyQueue.splice(j,1);
+                    in_r--;
+                    no_of_processes--;
+                    // readyQueue[j].push(time);
                     c=1;
                     break;
                 }
@@ -94,11 +102,11 @@ function scheduler(input){
         if(c==0){
             time+=1;
         }   
-        no_of_processes--;
+        
     }
 
     let ret=readyQueue;
     console.log("output");
-    console.log(readyQueue);
+    console.log(completed);
     return ret;    
 }
