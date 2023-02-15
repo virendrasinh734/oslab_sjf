@@ -58,14 +58,14 @@ function data_extractor(){
     console.log(inputarr);
     scheduler(inputarr);
 }
-
+let completed=[];
 //this function would do the scheduling and get the completion time stored in an array which would be returned
 function scheduler(input){
     let processQueue=[];//complete input
     let readyQueue=[];
     let no_of_processes=4;
     let time=0;
-    let completed=[];
+    
     while(no_of_processes>0){
         let in_r=0;
         let c=0;
@@ -108,5 +108,28 @@ function scheduler(input){
     let ret=readyQueue;
     console.log("output");
     console.log(completed);
+    filltable(completed);
     return ret;    
+}
+
+function addroww(dt){
+    //creating a new row
+    var row = table1.insertRow();
+    //loop to insert cells
+    for(var i=0;i<4;i++){
+        //creating and adding cell
+        var cell = row.insertCell();
+        //giving data to cell
+        cell.innerHTML = dt[i];
+    }
+}
+//------------------------------------------------------------------
+// let dt = [[1,2,3],[4,5,6]]
+function filltable(){
+    for(let i=0;i<completed.length;i++){
+        document.getElementById("table1").deleteRow(1);
+    }
+    for(let i=0;i<completed.length;i++){
+        addroww(completed[i]);
+    }
 }
