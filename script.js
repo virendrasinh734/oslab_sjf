@@ -8,10 +8,13 @@ let entries=0;
 
 //raumdueeter
 //creating an identifier for table 1 body
-const t1=document.querySelector('#som');
+const t1=document.querySelector('#table1');
 
 //------------------------------------------------------------------
 function addrow(){
+    document.getElementById("tablebuttons").style.scale="100%";
+    table1.style.scale="100%";
+
     //loading the current data(user input) into current data array
     data[0] = document.getElementById("PID").value;
     data[1] = document.getElementById("AT").value;
@@ -89,6 +92,8 @@ function scheduler(input){
                     time+=readyQueue[j][2];
                     let temp=readyQueue[j];
                     temp.push(time);
+                    temp.push((time-temp[1]));
+                    temp.push((temp[4]-temp[2]));
                     completed.push(temp);
                     readyQueue.splice(j,1);
                     in_r--;
@@ -116,7 +121,7 @@ function addroww(dt){
     //creating a new row
     var row = table1.insertRow();
     //loop to insert cells
-    for(var i=0;i<4;i++){
+    for(var i=0;i<6;i++){
         //creating and adding cell
         var cell = row.insertCell();
         //giving data to cell
