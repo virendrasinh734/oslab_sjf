@@ -106,7 +106,7 @@ h1{
 }
 #tablebuttons{
     display: flex;
-    scale: 0%;
+    transform: scaleY(0%);
     transition: all 0.5s;
     justify-content: center;
 }
@@ -115,7 +115,7 @@ table{
     border-spacing: 0;
     border-radius: 5px;
     transition: all 0.5s;
-    scale: 0%;
+    transform: scaleY(0%);
     margin-top: 5px;
 }
 th{
