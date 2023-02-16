@@ -71,8 +71,8 @@ function resettable(){
         document.getElementById("table1").deleteRow(1);
         
     }
-    document.getElementById("tablebuttons").style.scale="0%";
-    table1.style.scale="0%";
+    document.getElementById("tablebuttons").style.transform="scaleY(0%)";
+    table1.style.transform="scaleY(0%)";
     pid=[];
     completed=[];
     entries=0;
