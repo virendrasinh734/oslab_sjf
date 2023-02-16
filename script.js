@@ -5,15 +5,12 @@ let table2 = document.getElementById("table2");
 //current data array
 let data = [0,0,0];
 let entries=0;
-
 //raumdueeter
 //creating an identifier for table 1 body
 const t1=document.querySelector('#table1');
 let pid=[];
 //------------------------------------------------------------------
 function addrow(){
-    
-
     //loading the current data(user input) into current data array
     data[0] = document.getElementById("PID").value;
     data[1] = document.getElementById("AT").value;
@@ -65,11 +62,10 @@ function addrow(){
     entries+=1;
     pid.push(data[0]);
 }
-
 function resettable(){
     for(let k=0;k<entries;k++){
+        console.log(entries);
         document.getElementById("table1").deleteRow(1);
-        
     }
     document.getElementById("tablebuttons").style.transform="scaleY(0%)";
     table1.style.transform="scaleY(0%)";
@@ -97,12 +93,9 @@ function scheduler(input){
     let processQueue=[];//complete input
     let readyQueue=[];
     let no_of_processes=entries;
-    
-    
     while(no_of_processes>0){
         let in_r=0;
         let c=0;
-        
         for(let i=0;i<input.length;i++){
             if(time>=input[i][1] && !(readyQueue.includes(input[i]))){
                 readyQueue.push(input[i]);
@@ -136,17 +129,14 @@ function scheduler(input){
         }
         if(c==0){
             time+=1;
-        }   
-        
+        }       
     }
-
     let ret=readyQueue;
     console.log("output");
     console.log(completed);
     filltable(completed);
     return ret;    
 }
-
 function addroww(dt){
     //creating a new row
     var row = table1.insertRow();
@@ -158,16 +148,21 @@ function addroww(dt){
         cell.innerHTML = dt[i];
     }
 }
-//------------------------------------------------------------------
-// let dt = [[1,2,3],[4,5,6]]
 function filltable(){
+    console.log("length of completed is :"+completed.length);
     for(let i=0;i<completed.length;i++){
         document.getElementById("table1").deleteRow(1);
     }
+    // resettable();
+    document.getElementById("tablebuttons").style.transform="scaleY(100%)";
+    table1.style.transform="scaleY(100%)";
+    console.log("completed length: ",completed.length);
     for(let i=0;i<completed.length;i++){
         addroww(completed[i]);
     }
     create();
+    completed=[];
+    time=0
 }
 ///
 let box = document.getElementById("chart"); //refferne to the outer box
