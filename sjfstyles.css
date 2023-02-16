@@ -140,3 +140,15 @@ td{
     text-align: center;
     border:1px solid #ECF0F1;
 }
+#container{
+    display: flex;
+    justify-content: center;
+    
+}
+#chart{
+    width: 70%;
+
+}
+#chart span{
+    background: transparent;
+}

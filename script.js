@@ -65,7 +65,7 @@ function addrow(){
     entries+=1;
     pid.push(data[0]);
 }
-//------------------------------------------------------------------
+
 function resettable(){
     for(let k=0;k<entries;k++){
         document.getElementById("table1").deleteRow(1);
@@ -74,6 +74,7 @@ function resettable(){
     document.getElementById("tablebuttons").style.scale="0%";
     table1.style.scale="0%";
     pid=[];
+    completed=[];
     entries=0;
 }
 function data_extractor(){
@@ -89,13 +90,14 @@ function data_extractor(){
     console.log(inputarr);
     scheduler(inputarr);
 }
+let time=0;
 let completed=[];
 //this function would do the scheduling and get the completion time stored in an array which would be returned
 function scheduler(input){
     let processQueue=[];//complete input
     let readyQueue=[];
     let no_of_processes=entries;
-    let time=0;
+    
     
     while(no_of_processes>0){
         let in_r=0;
@@ -165,39 +167,47 @@ function filltable(){
     for(let i=0;i<completed.length;i++){
         addroww(completed[i]);
     }
+    create();
 }
 ///
 let box = document.getElementById("chart"); //refferne to the outer box
 let divarray =[]; //array of all the div(smaller boxes) which will be added to the outer box
 let i = -1;//index of the smaller boxes(divarray)
-let dataa = [2,3,2,3,8,2];//bursttime
+let dataa=[];
+// for(let w=0;w<completed.length;w++){
+//     dataa.push(completed[2]);
+// }
 let timer=0;//timer to print current time at the corner
-let totaltime = 20;
+
 let text; //append the current time to the smaler boxes
-let col = ["blue","orange","green","yellow"]; //random color cboose
-create(); //calling create function
+let col = ["red","#b30047"]; //random color cboose
+//calling create function
 function create(){
-    for(let j=0;j<dataa.length;j++){
+    for(let j=0;j<completed.length;j++){
         createDiv(); //creating smaller boxes equalent to the no. of elements in the burst time array
     }
     resizeDiv();//resizeing them
 }
 function createDiv(){
+    let totaltime = time-1;
     i=i+1; //inc divarray index
     divarray[i]=document.createElement("div"); //create smaller box and add to divarray
     box.appendChild(divarray[i]); //appending to the main box
     text = document.createElement("span"); //creating text
-    timer = timer+ data[i]; //setting the current time
-    text.textContent = timer;
+    // timer = timer+ completed[i][2]; //setting the current time
+    text.textContent = "P"+completed[i][0]+"("+(completed[i][3]-completed[i][2])+" - "+completed[i][3]+")";
     text.style.paddingTop = "50px"; //padding in order to put them at bottom of box
     divarray[i].appendChild(text); //appending to the smaller box
     divarray[i].style.display="flex"; //usng flex to automatically move the text
-    divarray[i].style.justifyContent="flex-end"; //moving the text to the right most corner
-    divarray[i].style.backgroundColor = col[Math.floor(Math.random()*col.length)]; //setting color
-    divarray[i].style.border = "1px solid black"; //setting border
+    divarray[i].style.justifyContent="center"; //moving the text to the right most corner
+    divarray[i].style.backgroundColor = col[i%2]; //setting color
+    divarray[i].style.border = "0.2px solid white"; //setting border
 }
 function resizeDiv(){
+    let totaltime = time-1;
     for(let j=0;j<divarray.length;j++){
-        divarray[j].style.width = ((data[j]/totaltime)*100)+"%"; //setting width
+        divarray[j].style.width = ((completed[j][2]/totaltime)*100)+"%";
+        console.log(totaltime);
+        console.log(((completed[j][2]/totaltime)*100)+"%"); //setting width
     }
 }
