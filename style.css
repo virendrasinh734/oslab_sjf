@@ -1,0 +1,82 @@
+:root{
+    --secondaryColor: rgb(76, 0, 255);
+}
+html{
+    scroll-behavior: smooth;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #24252A;
+    color: #ECF0F1;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.highlight{
+    color: var(--secondaryColor);
+    border-bottom: 1px solid #ECF0F1;
+    font-size: larger;
+    text-shadow: 0px 0px 10px var(--secondaryColor);
+    padding: 2%;
+    text-align: center;
+    border-radius: 15px;
+}
+.title{
+    text-align: center;
+    margin: 45px; 
+    font-size: 45px;
+    background-color: #ECF0F1;
+    color: var(--secondaryColor);
+    box-shadow: 0px 0px 15px 1px var(--secondaryColor);
+    border-radius: 15px;
+    font-weight: 600;
+}
+.TEXT1{
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: larger;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+.buttoncontainer1{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.button1{
+    padding: 1%;
+    width: 20%;
+    background-color: rgba(0,0,0,0);
+    border-color: #ECF0F1;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: large;
+    transition: all 0.5s;
+}
+.button1:hover{
+    background-color: var(--secondaryColor);
+    box-shadow: 0px 0px 15px 5px var(--secondaryColor);
+}
+#home{
+    height: 800px;
+    background: linear-gradient(-45deg,rgb(255, 55, 55),rgb(21, 0, 255));
+}
+#sjf{
+    height: 800px;
+}
+#project1{
+    height: 800px;
+}
+#project2{
+    height: 800px;
+}
+#project3{
+    height: 800px;
+}
+#project4{
+    height: 800px;
+}

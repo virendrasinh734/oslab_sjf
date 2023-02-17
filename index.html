@@ -4,34 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shortest First Scheduling</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <!-- <img class="logo" src="favcon.png" alt="LOGO"> -->
-        <p class="logo">
-            Team RadioActive
-        </p>
-        <nav>
-            <ul class="nav_links">
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
-        </nav>
-        <a class="sta" href="#"><button>Contact</button></a>
-    </header>
-    <div class="main">
-        <b id="body">
-            Greetings!
-<br><br>
-Underneath lies the presentation of a project that shall showcase the implementation of various Operating System Algorithms. There are four such simulations that exist alongside the theory that pertains to them. The simulations include, Shortest Job First Algorithm, _, _, _. 
-<br><br>
-The simulations showcase how the algorithms opt for a particular task above the other with respect to their specifications. 
-
-        </b><br>
-        <button class="but" onclick="window.location.href='projects.html';">Check Out</button>
-    </div>
+    <!-- ------------------------------------------------------------------ -->
+    <section id="home">
+        <div style="height: 50px; background: transparent;"></div>
+        <div class="TEXT1" style="background: transparent;">
+            <div class="title">Greetings!</div>
+            <br><br>
+            Underneath lies the presentation of a project that shall showcase the implementation of various Operating
+            System Algorithms. There are four such simulations that exist alongside the theory that pertains to them. The
+            simulations include, Shortest Job First Algorithm, _, _, _.
+            <br><br>
+            The simulations showcase how the algorithms opt for a particular task above the other with respect to their
+            specifications.
+        </div>
+        <div class="buttoncontainer1" style="background: transparent;">
+            <button class="button1" onclick="window.location.href='#sjf'">Check Out</button>
+        </div>
+    </section>
+    <!-- ------------------------------------------------------------------ -->
+    <section id="sjf">
+        <div style="height: 50px;"></div>
+        <div class="TEXT1" style="text-align: justify;">
+            <div class="title">Shortest Job First</div>
+            The shortest job first (SJF) or shortest job next, is a scheduling policy that selects the waiting process with the
+            smallest execution time to execute next. SJN, also known as Shortest Job Next (SJN), can be preemptive or
+            non-preemptive.<br><br>
+            <div class="highlight">Characteristics of SJF Scheduling:</div>
+            <br>
+            -Shortest Job first has the advantage of having a minimum average waiting time among all scheduling
+            algorithms.<br>
+            -It is a Greedy Algorithm.<br>
+            -It may cause starvation if shorter processes keep coming. This problem can be solved using the concept of
+            aging.<br>
+            It is practically not feasible as the Operating System may not know burst times and therefore may not sort
+            them. While it is not possible to predict execution time, several methods can be used to estimate the
+            execution time for a job, such as a weighted average of previous execution times.<br><br>
+            SJF can be used in specialized environments where accurate estimates of running time are available.
+        </div>
+        <div class="buttoncontainer1">
+            <button class="button1" onclick="window.location.href='sjf.html'">Simulator</button>
+        </div>
+    </section>
 </body>
 </html>
