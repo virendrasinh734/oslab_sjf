@@ -75,13 +75,19 @@ function resettable(){
     document.getElementById("tablebuttons").style.transform="scaleY(0%)";
     table1.style.transform="scaleY(0%)";
     pid=[];
-    divarray=[]
+    divarray=[];
+    i=0;
     completed=[];
     entries=0;
     time=0;
 }
 function data_extractor(){
     let inputarr=[]
+    for(let w=0;w<divarray.length;w++){
+        box.removeChild(divarray[w]);
+    }
+    divarray=[];
+    i=0;
     for(let i=1;i<=entries;i++){
         let a1=parseInt(document.getElementById("table1").rows[i].cells[0].innerHTML);
         let a2=parseInt(document.getElementById("table1").rows[i].cells[1].innerHTML);
@@ -125,29 +131,42 @@ function scheduler(input){
                 if (tot == n) // total no of process = completed process loop will be terminated
                     break;
                 
-                for (var i=0; i< n; i++)
+                for (var a=0; a< n; a++)
                 {
                     /*
                      * If i'th process arrival time <= system time and its flag=0 and burst<min 
                      * That process will be executed first 
                      */ 
                     var count=0;
-                    if ((at[i] <= clock) && (flag[i] == 0) && (bt[i]<min))
+                    if ((at[a] <= clock) && (flag[a] == 0) && (bt[a]<min))
                         {
-                            min=bt[i];
-                            c=i;
+                            min=bt[a];
+                            c=a;
                         } 
 
                 }
                 /* If c==n means c value can not updated because no process arrival time< system time so we increase the system time */
                 if (c==n){
-                    let a;
-                    a=clock;
-                    let b=[];
-                    b.push(a);
-                    b.push(a+1);
+                    // let a;
+                    // a=clock;
+                    // let b=[];
+                    // b.push(a);
+                    // b.push(a+1);
+                    divarray[i]=document.createElement("div");
+                    box.appendChild(divarray[i]);
+                    text = document.createElement("span");
+                    text.textContent = (clock+"-"+(clock+1));
+                    text.style.paddingTop = "50px"; //padding in order to put them at bottom of box
+                    divarray[i].appendChild(text); //appending to the smaller box
+                    divarray[i].style.display="flex"; //usng flex to automatically move the text
+                    divarray[i].style.justifyContent="center"; //moving the text to the right most corner
+                    divarray[i].style.backgroundColor = "white"; //setting color
+                    divarray[i].style.border = "0.2px solid white";
+                    divarray[i].style.width=(1+"px"); 
+                    divarray[i].style.flexGrow=1;
                     clock++;
-                    free.push(b);
+                    i++;
+                    // free.push(b);
                 } 
                     
                 else
@@ -161,9 +180,27 @@ function scheduler(input){
                     ta[c]=ct[c]-at[c];
                     wt[c]=ta[c]-bt[c];
                     
+                    divarray[i]=document.createElement("div"); //create smaller box and add to divarray
+                    box.appendChild(divarray[i]); //appending to the main box
+                    text = document.createElement("span"); //creating text
+                    // timer = timer+ completed[i][2]; //setting the current time
+                    text.textContent = "P"+pid[c]+"("+(ct[c]-bt[c])+" - "+ct[c]+")";
+                    text.style.paddingTop = "50px"; //padding in order to put them at bottom of box
+                    divarray[i].appendChild(text); //appending to the smaller box
+                    divarray[i].style.display="flex"; //usng flex to automatically move the text
+                    divarray[i].style.justifyContent="center"; //moving the text to the right most corner
+                    divarray[i].style.backgroundColor = col[i%2]; //setting color
+                    divarray[i].style.border = "0.2px solid white"; //setting border
+                    // console.log(completed.length+"    "+(i-count));
+                    // console.log("bt"+completed[i-count-1][2]);
+                    divarray[i].style.width=bt[c]+"px";
+                    divarray[i].style.flexGrow=bt[c];
+                    console.log(divarray[i].style.width);
                     clock+=bt[c];
                     flag[c]=1;
-                    tot++;   
+                    tot++;
+                    i++;
+                       
                 }
             }
 
@@ -212,14 +249,14 @@ function filltable(){
     for(let i=0;i<completed.length;i++){
         addroww(completed[i]);
     }
-    create();
+    // create();
     completed=[];
     time=0
 }
 ///
 let box = document.getElementById("chart"); //refferne to the outer box
 let divarray =[]; //array of all the div(smaller boxes) which will be added to the outer box
-let i = -1;//index of the smaller boxes(divarray)
+let i = 0;//index of the smaller boxes(divarray)
 let dataa=[];
 // for(let w=0;w<completed.length;w++){
 //     dataa.push(completed[2]);
@@ -229,66 +266,92 @@ let timer=0;//timer to print current time at the corner
 let text; //append the current time to the smaler boxes
 let col = ["red","#b30047"]; //random color cboose
 //calling create function
-function create(){
-    i=-1;
-    for(let j=0;j<(completed.length + free.length);j++){
-        createDiv(); //creating smaller boxes equalent to the no. of elements in the burst time array
-    }
-    // resizeDiv();//resizeing them
-}
-let lst1=[];
-let lst2=[];
-function createDiv(){
-    let totaltime = time-1;
-    i=i+1; //inc divarray index
-    let d=0;
-    let count=0;
-    console.log(completed[2]);
-    for(let w=0;w<free.length;w++){
-        d=0;
-        if(free[w][0]==i){
-            d=1;
-            count++;
-            lst1.push(i);
-            divarray[i]=document.createElement("div");
-            box.appendChild(divarray[i]);
-            text = document.createElement("span");
-            text.textContent = (free[w][0])+" - "+free[w][1];
-            text.style.paddingTop = "50px"; //padding in order to put them at bottom of box
-            divarray[i].appendChild(text); //appending to the smaller box
-            divarray[i].style.display="flex"; //usng flex to automatically move the text
-            divarray[i].style.justifyContent="center"; //moving the text to the right most corner
-            divarray[i].style.backgroundColor = "white"; //setting color
-            divarray[i].style.border = "0.2px solid white";
-            divarray[i].style.width=(1+"px"); 
-            divarray[i].style.flexGrow=1;
-            break;
-        }
-    }
+// function create(){
+//     i=-1;
+//     console.log("no of divs="+(completed.length + free.length));
+//     for(let j=0;j<=(completed.length + free.length);j++){
+//         createDiv(); //creating smaller boxes equalent to the no. of elements in the burst time array
+//     }
+//     // resizeDiv();//resizeing them
+// }
+// let lst1=[];
+// let lst2=[];
+// function createDiv(){
+//     let totaltime = time+1;
+//     i=i+1; //inc divarray index
+//     let d=0;
+//     let count=0;
+//     console.log(completed[2]);
+//     for(let w=0;w<free.length;w++){
+//         d=0;
+//         if(free[w][0]==i){
+//             d=1;
+//             count++;
+//             lst1.push(i);
+//             divarray[i]=document.createElement("div");
+//             box.appendChild(divarray[i]);
+//             text = document.createElement("span");
+//             text.textContent = (free[w][0])+" - "+free[w][1];
+//             text.style.paddingTop = "50px"; //padding in order to put them at bottom of box
+//             divarray[i].appendChild(text); //appending to the smaller box
+//             divarray[i].style.display="flex"; //usng flex to automatically move the text
+//             divarray[i].style.justifyContent="center"; //moving the text to the right most corner
+//             divarray[i].style.backgroundColor = "white"; //setting color
+//             divarray[i].style.border = "0.2px solid white";
+//             divarray[i].style.width=(1+"px"); 
+//             divarray[i].style.flexGrow=1;
+//             break;
+//         }
+//     }
     
-        if(d==0){
-            lst2.push(i);
-            divarray[i]=document.createElement("div"); //create smaller box and add to divarray
-            box.appendChild(divarray[i]); //appending to the main box
-            text = document.createElement("span"); //creating text
-            // timer = timer+ completed[i][2]; //setting the current time
-            text.textContent = "P"+completed[i-count-1][0]+"("+(completed[i-count-1][3]-completed[i-count-1][2])+" - "+completed[i-count-1][3]+")";
+//         if(d==0 && (i-count)<completed.length){
+//             if(i==0){
+//                 lst2.push(i);
+//             divarray[i]=document.createElement("div"); //create smaller box and add to divarray
+//             box.appendChild(divarray[i]); //appending to the main box
+//             text = document.createElement("span"); //creating text
+//             // timer = timer+ completed[i][2]; //setting the current time
+//             text.textContent = "P"+completed[i][0]+"("+(completed[i][3]-completed[i][2])+" - "+completed[i][3]+")";
             
-            text.style.paddingTop = "50px"; //padding in order to put them at bottom of box
-            divarray[i].appendChild(text); //appending to the smaller box
-            divarray[i].style.display="flex"; //usng flex to automatically move the text
-            divarray[i].style.justifyContent="center"; //moving the text to the right most corner
-            divarray[i].style.backgroundColor = col[i%2]; //setting color
-            divarray[i].style.border = "0.2px solid white"; //setting border
-            // console.log(completed.length+"    "+(i-count));
-            console.log("bt"+completed[i-count-1][2]);
-            divarray[i].style.width=completed[i-count-1][2]+"px";
-            divarray[i].style.flexGrow=completed[i-count-1][2];
-            console.log(divarray[i].style.width);
-            }
+//             text.style.paddingTop = "50px"; //padding in order to put them at bottom of box
+//             divarray[i].appendChild(text); //appending to the smaller box
+//             divarray[i].style.display="flex"; //usng flex to automatically move the text
+//             divarray[i].style.justifyContent="center"; //moving the text to the right most corner
+//             divarray[i].style.backgroundColor = col[i%2]; //setting color
+//             divarray[i].style.border = "0.2px solid white"; //setting border
+//             // console.log(completed.length+"    "+(i-count));
+//             console.log("bt"+completed[i][2]);
+//             divarray[i].style.width=completed[i][2]+"px";
+//             divarray[i].style.flexGrow=completed[i][2];
+//             console.log(divarray[i].style.width);
+//             return;
+//             }
+//             lst2.push(i);
+//             divarray[i]=document.createElement("div"); //create smaller box and add to divarray
+//             box.appendChild(divarray[i]); //appending to the main box
+//             text = document.createElement("span"); //creating text
+//             // timer = timer+ completed[i][2]; //setting the current time
+//             console.log("i-count="+(i-count));
+//             text.textContent = "P"+completed[i-count][0]+"("+(completed[i-count][3]-completed[i-count][2])+" - "+completed[i-count][3]+")";
+            
+//             text.style.paddingTop = "50px"; //padding in order to put them at bottom of box
+//             divarray[i].appendChild(text); //appending to the smaller box
+//             divarray[i].style.display="flex"; //usng flex to automatically move the text
+//             divarray[i].style.justifyContent="center"; //moving the text to the right most corner
+//             divarray[i].style.backgroundColor = col[i%2]; //setting color
+//             divarray[i].style.border = "0.2px solid white"; //setting border
+//             // console.log(completed.length+"    "+(i-count));
+//             console.log("bt"+completed[i-count-1][2]);
+//             divarray[i].style.width=completed[i-count-1][2]+"px";
+//             divarray[i].style.flexGrow=completed[i-count-1][2];
+//             console.log(divarray[i].style.width);
+            
+//             }
+
+//         }
         
-    
-}
+//----------------------------------------------------------------------------------    
+
 // function resizeDiv(){
 //     let totaltime = time-1;
 //     let r=0;
@@ -308,25 +371,25 @@ function createDiv(){
 //     }
 // }
 
-let sidebar = document.getElementById("sidebox");
-    let button = document.getElementById("sidebutton");
-    let l=0; //toggle flag
-    closeb();
-    function sidebart(){
-        if(l==0){
-            openb();
-            l=1;
-        }
-        else{
-            l=0;
-            closeb();
-        }
-    }
-    function openb(){
-        button.style.left = "180px";
-        sidebar.style.transform="translateX(0px)";
-    }
-    function closeb(){
-        sidebar.style.transform="translateX(-220px)";
-        button.style.left = "0px";
-    }
+// let sidebar = document.getElementById("sidebox");
+// let button = document.getElementById("sidebutton");
+// let l=0; //toggle flag
+// closeb();
+//     function sidebart(){
+//         if(l==0){
+//             openb();
+//             l=1;
+//         }
+//         else{
+//             l=0;
+//             closeb();
+//         }
+//     }
+//     function openb(){
+//         button.style.left = "180px";
+//         sidebar.style.transform="translateX(0px)";
+//     }
+//     function closeb(){
+//         sidebar.style.transform="translateX(-220px)";
+//         button.style.left = "0px";
+//     }
