@@ -70,4 +70,29 @@
         </div>
     </section>
 </body>
+<script>
+
+    let sidebar = document.getElementById("sidebox");
+    let button = document.getElementById("sidebutton");
+    let i=0; //toggle flag
+    closeb();
+    function sidebart(){
+        if(i==0){
+            openb();
+            i=1;
+        }
+        else{
+            i=0;
+            closeb();
+        }
+    }
+    function openb(){
+        button.style.left = "180px";
+        sidebar.style.transform="translateX(0px)";
+    }
+    function closeb(){
+        sidebar.style.transform="translateX(-220px)";
+        button.style.left = "0px";
+    }
+</script>
 </html>
