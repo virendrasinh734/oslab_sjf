@@ -69,9 +69,13 @@ function resettable(){
         console.log(entries);
         document.getElementById("table1").deleteRow(1);
     }
+    for(let w=0;w<divarray.length;w++){
+        box.removeChild(divarray[w]);
+    }
     document.getElementById("tablebuttons").style.transform="scaleY(0%)";
     table1.style.transform="scaleY(0%)";
     pid=[];
+    divarray=[]
     completed=[];
     entries=0;
     time=0;
