@@ -141,6 +141,7 @@ td{
     border:1px solid #ECF0F1;
 }
 #container{
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     
@@ -155,4 +156,9 @@ td{
 }
 #chart span{
     background: transparent;
+}
+h2{
+    color: #d0e6ec;
+    font-size: larger;
+    text-align: center;
 }
