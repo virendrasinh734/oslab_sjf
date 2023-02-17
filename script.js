@@ -307,3 +307,26 @@ function createDiv(){
 //         // console.log(((completed[j][2]/totaltime)*100)+"%"); //setting width
 //     }
 // }
+
+let sidebar = document.getElementById("sidebox");
+    let button = document.getElementById("sidebutton");
+    let l=0; //toggle flag
+    closeb();
+    function sidebart(){
+        if(l==0){
+            openb();
+            l=1;
+        }
+        else{
+            l=0;
+            closeb();
+        }
+    }
+    function openb(){
+        button.style.left = "180px";
+        sidebar.style.transform="translateX(0px)";
+    }
+    function closeb(){
+        sidebar.style.transform="translateX(-220px)";
+        button.style.left = "0px";
+    }

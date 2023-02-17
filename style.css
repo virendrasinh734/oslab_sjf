@@ -1,5 +1,5 @@
 :root{
-    --secondaryColor: rgb(76, 0, 255);
+    --secondaryColor: rgb(255, 0, 0);
 }
 html{
     scroll-behavior: smooth;
@@ -11,6 +11,36 @@ html{
     background-color: #24252A;
     color: #ECF0F1;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#sidebox{
+    background-color: #ECF0F1;
+    padding-top: 30px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    padding-left: 12px;
+    transition: all 0.1s;
+    width:auto; 
+    position:fixed;
+}
+#sidebutton{
+    position: fixed;
+    padding: 1%;
+    width: auto;
+    position: fixed;
+    background-color: rgba(0,0,0,0);
+    transition: all 0.1s;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.sidebar_links{
+    color: #24252A;
+    background: transparent;
+    text-decoration: none;
+}
+.sidebar_li{
+    padding-top: 15px;
+    background-color: #ECF0F1;
+    margin: 0px;
 }
 .highlight{
     color: var(--secondaryColor);
